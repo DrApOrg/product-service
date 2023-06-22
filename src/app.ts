@@ -8,9 +8,7 @@ const main = async () => {
 
   const server = new Server(app);
 
-  const data = await init(
-    "mongodb+srv://TShop:TShop123@tshop.lodfvqo.mongodb.net/?retryWrites=true&w=majority"
-  );
+  const data = await init("MONGO_URLCONNECTION");
 
   server.listen();
 };

@@ -1,8 +1,4 @@
-import dotenv from "dotenv";
-
-let path = `${__dirname}/../../../.env.${process.env.NODE_ENV}`;
-
-dotenv.config({ path: path });
+import "dotenv/config";
 
 const config = {
   MONGO_URLCONNECTION: process.env.MONGO_URLCONNECTION,
