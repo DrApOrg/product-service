@@ -8,7 +8,7 @@ const main = async () => {
 
   const server = new Server(app);
 
-  const data = await init("MONGO_URLCONNECTION");
+  const data = await init("mongo");
 
   server.listen();
 };
