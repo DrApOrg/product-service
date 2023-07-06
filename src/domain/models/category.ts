@@ -1,17 +1,15 @@
 export interface CategoryPayload extends Omit<Category, "id"> {}
 export interface Category {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  subcategories?: Subcategory[];
+}
+
+export interface Subcategory {
   id?: string;
   name: string;
-  description?: string;
-  price: number;
-  stock: number;
-  size?: number;
-  color?: string;
-  quality?: string;
-  ratings: number;
-  supplier: string;
-  category: string;
-  subcategory: string;
-  createdAt: string;
-  updatedAt: string;
+  description: string;
+  image: string;
 }

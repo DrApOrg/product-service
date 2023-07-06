@@ -1,23 +1,32 @@
 import { Product } from "../models/product";
 import { ProductRepository } from "../../infrastructure/repositories/product.repo";
 import { BaseError } from "../Exceptions/BaseError";
+import { IFileRepository } from "../repositories/IFile.srv";
 export interface ProductService {
   createProduct: (product: Product) => Promise<Product>;
-  updateProduct: (params: Product) => Promise<Product>;
+  updateProduct: (id: string, body: Product) => Promise<Product>;
   findById: (id: string) => Promise<Product>;
+  uploadFile: (param: any) => Promise<string>;
   deleteProduct: (id: string) => Promise<boolean>;
 }
 
 export class ProductService implements ProductService {
-  constructor(private accRepo: ProductRepository) {}
+  constructor(
+    private accRepo: ProductRepository,
+    private s3Repo: IFileRepository
+  ) {}
+
+  uploadFile = async (param: any): Promise<string> => {
+    return this.s3Repo.uploadFile(param);
+  };
 
   createProduct = async (product: Product): Promise<Product> => {
     const createdProduct = await this.accRepo.create(product);
     return createdProduct;
   };
 
-  updateProduct = async (params: Product): Promise<Product> => {
-    const product = await this.accRepo.update(params.id as string, params);
+  updateProduct = async (id: string, body: Product): Promise<Product> => {
+    const product = await this.accRepo.update(id, body);
     if (!product) {
       throw new BaseError("");
     }

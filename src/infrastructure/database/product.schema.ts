@@ -8,8 +8,19 @@ export const productSchema = new Schema({
   size: { type: Number },
   color: { type: String },
   quality: { type: String },
-  ratings: { type: Number, required: true },
   supplier: { type: String, required: true },
-  category: { type: String, required: true },
-  subcategory: { type: String, required: true },
+  category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
+  comments: [
+    {
+      user: { type: String },
+      content: { type: String },
+      date: { type: Date, default: Date.now },
+    },
+  ],
+  ratings: [
+    {
+      user: { type: String },
+      value: { type: Number, min: 1, max: 5 },
+    },
+  ],
 });

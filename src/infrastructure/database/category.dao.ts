@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { categorySchema } from "./category.schema";
+import { CategorySchema } from "./category.schema";
 import { Category } from "../../domain/models/category";
 
-export const categoryDao = model<Category>("Product", categorySchema);
+export const CategoryDao = model<Category>("Category", CategorySchema);

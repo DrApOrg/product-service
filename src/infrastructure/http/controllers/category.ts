@@ -1,32 +1,15 @@
 import { ResponsePayload } from "../../../domain/Payload/response.payload";
-import { Product } from "../../../domain/models/product";
-import { ProductService } from "../../../domain/services/product.svc";
+import { Category } from "../../../domain/models/category";
+import { CategoryService } from "../../../domain/services/category.svc";
 import type { NextFunction, Request, Response } from "express";
-import { IFileRepository } from "../../../domain/repositories/IFile.srv";
-export class ProductController {
-  constructor(private service: ProductService) {}
 
-  uploadImage = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      if (!req.files) {
-        throw Error("not found file");
-      }
-      const imageUrl = await this.service.uploadFile(req.files.file);
-      res
-        .json({
-          imageurl: imageUrl,
-          imagename: imageUrl.split("/").pop(),
-        })
-        .status(202);
-    } catch (error) {
-      next(error);
-    }
-  };
-  postProduct = async (req: Request, res: Response, next: NextFunction) => {
+export class CategoryController {
+  constructor(private service: CategoryService) {}
+  postCategory = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const product = req.body;
-      const createdProduct = await this.service.createProduct(product);
-      const payload: ResponsePayload<Product> = {
+      const createdProduct = await this.service.createCategory(product);
+      const payload: ResponsePayload<Category> = {
         message: "product created successfully",
         status: 200,
         data: createdProduct,
@@ -36,12 +19,12 @@ export class ProductController {
       next(error);
     }
   };
-  updateProduct = async (req: Request, res: Response, next: NextFunction) => {
+  updateCategory = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const product = req.body;
-      const updateProduct = await this.service.updateProduct(id, product);
-      const payload: ResponsePayload<Product> = {
+      const updateProduct = await this.service.updateCategory(id, product);
+      const payload: ResponsePayload<Category> = {
         message: "product updated successfully",
         status: 200,
         data: updateProduct,
@@ -51,11 +34,11 @@ export class ProductController {
       next(error);
     }
   };
-  getProduct = async (req: Request, res: Response, next: NextFunction) => {
+  getCategory = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const getProduct = await this.service.findById(id);
-      const payload: ResponsePayload<Product> = {
+      const payload: ResponsePayload<Category> = {
         message: "product get successfully",
         status: 200,
         data: getProduct,
@@ -65,10 +48,10 @@ export class ProductController {
       next(error);
     }
   };
-  getProducts = async (req: Request, res: Response, next: NextFunction) => {
+  getCategories = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const getProducts = await this.service.find();
-      const payload: ResponsePayload<Product[]> = {
+      const payload: ResponsePayload<Category[]> = {
         message: "product get successfully",
         status: 200,
         data: getProducts,
@@ -79,10 +62,10 @@ export class ProductController {
     }
   };
 
-  deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
+  deleteCategory = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
-      const result = await this.service.deleteProduct(id);
+      const result = await this.service.deleteCategory(id);
       const payload: ResponsePayload<boolean> = {
         message: "delete product  successfully",
         status: 200,

@@ -1,15 +1,17 @@
 import { Schema } from "mongoose";
+import { Category, Subcategory } from "../../domain/models/category";
 
-export const categorySchema = new Schema({
+export const SubcategorySchema = new Schema<Category>({
   name: { type: String, required: true },
-  description: { type: String },
-  price: { type: Number, required: true },
-  stock: { type: Number, required: true },
-  size: { type: Number },
-  color: { type: String },
-  quality: { type: String },
-  ratings: { type: Number, required: true },
-  supplier: { type: String, required: true },
-  category: { type: String, required: true },
-  subcategory: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String, required: true },
 });
+
+export const CategorySchema = new Schema<Category>({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String, required: true },
+  subcategories: [SubcategorySchema],
+});
+
+export default { CategorySchema, SubcategorySchema };

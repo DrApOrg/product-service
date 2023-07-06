@@ -2,7 +2,7 @@ import { Application, json, urlencoded } from "express";
 import { Router } from "./infrastructure/http/routes/Router";
 import cors from "cors";
 import config from "./infrastructure/config/config";
-
+import fileupload from "express-fileupload";
 // Server class
 export default class Server {
   private app: Application;
@@ -20,6 +20,14 @@ export default class Server {
 
     // json middleware
     this.app.use(json());
+
+    // file uploader middleware
+    this.app.use(
+      fileupload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+      })
+    );
   }
 
   public listen() {

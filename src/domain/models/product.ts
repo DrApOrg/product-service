@@ -4,14 +4,25 @@ export interface Product {
   name: string;
   description?: string;
   price: number;
-  stock: number;
+  image?: string;
+  category?: string;
   size?: number;
   color?: string;
-  quality?: string;
-  ratings: number;
+  stock: number;
   supplier: string;
-  category: string;
-  subcategory: string;
+  comments: Comment[];
+  ratings: Rating[];
   createdAt: string;
   updatedAt: string;
+}
+
+interface Comment {
+  user: string;
+  content: string;
+  date: Date;
+}
+
+interface Rating {
+  user: string;
+  value: number;
 }

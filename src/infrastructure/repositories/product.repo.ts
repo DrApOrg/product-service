@@ -11,8 +11,8 @@ export class ProductRepository implements IProductRepository {
     return null;
   }
 
-  async update(id: string, params: ProductPayload): Promise<Product | null> {
-    const product = await productDao.findByIdAndUpdate(id, params, {
+  async update(id: string, body: ProductPayload): Promise<Product | null> {
+    const product = await productDao.findByIdAndUpdate<Product>(id, body, {
       new: true,
     });
     if (product) {
