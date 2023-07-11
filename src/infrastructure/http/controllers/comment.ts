@@ -1,16 +1,16 @@
 import { ResponsePayload } from "../../../domain/Payload/response.payload";
-import { Product } from "../../../domain/models/product";
-import { ProductService } from "../../../domain/services/product.svc";
+import { Comment } from "../../../domain/models/comment";
+import { CommentService } from "../../../domain/services/comment.svc";
 import type { NextFunction, Request, Response } from "express";
 
-export class ProductController {
-  constructor(private service: ProductService) {}
+export class CommentController {
+  constructor(private service: CommentService) {}
 
-  postProduct = async (req: Request, res: Response, next: NextFunction) => {
+  postComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const product = req.body;
       const createdProduct = await this.service.createProduct(product);
-      const payload: ResponsePayload<Product> = {
+      const payload: ResponsePayload<Comment> = {
         message: "product created successfully",
         status: 200,
         data: createdProduct,
@@ -20,12 +20,12 @@ export class ProductController {
       next(error);
     }
   };
-  updateProduct = async (req: Request, res: Response, next: NextFunction) => {
+  updateComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const product = req.body;
       const updateProduct = await this.service.updateProduct(id, product);
-      const payload: ResponsePayload<Product> = {
+      const payload: ResponsePayload<Comment> = {
         message: "product updated successfully",
         status: 200,
         data: updateProduct,
@@ -35,11 +35,11 @@ export class ProductController {
       next(error);
     }
   };
-  getProduct = async (req: Request, res: Response, next: NextFunction) => {
+  getComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const getProduct = await this.service.findById(id);
-      const payload: ResponsePayload<Product> = {
+      const payload: ResponsePayload<Comment> = {
         message: "product get successfully",
         status: 200,
         data: getProduct,
@@ -49,10 +49,10 @@ export class ProductController {
       next(error);
     }
   };
-  getProducts = async (req: Request, res: Response, next: NextFunction) => {
+  getComments = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const getProducts = await this.service.find();
-      const payload: ResponsePayload<Product[]> = {
+      const payload: ResponsePayload<Comment[]> = {
         message: "product get successfully",
         status: 200,
         data: getProducts,
@@ -63,7 +63,7 @@ export class ProductController {
     }
   };
 
-  deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
+  deleteComment = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const result = await this.service.deleteProduct(id);

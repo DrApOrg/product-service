@@ -1,16 +1,16 @@
 import { ResponsePayload } from "../../../domain/Payload/response.payload";
-import { Product } from "../../../domain/models/product";
-import { ProductService } from "../../../domain/services/product.svc";
+import { Review } from "../../../domain/models/review";
+import { ReviewService } from "../../../domain/services/review.svc";
 import type { NextFunction, Request, Response } from "express";
 
-export class ProductController {
-  constructor(private service: ProductService) {}
+export class ReviewController {
+  constructor(private service: ReviewService) {}
 
-  postProduct = async (req: Request, res: Response, next: NextFunction) => {
+  postReview = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const product = req.body;
-      const createdProduct = await this.service.createProduct(product);
-      const payload: ResponsePayload<Product> = {
+      const createdProduct = await this.service.createReview(product);
+      const payload: ResponsePayload<Review> = {
         message: "product created successfully",
         status: 200,
         data: createdProduct,
@@ -20,12 +20,12 @@ export class ProductController {
       next(error);
     }
   };
-  updateProduct = async (req: Request, res: Response, next: NextFunction) => {
+  updateReview = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const product = req.body;
-      const updateProduct = await this.service.updateProduct(id, product);
-      const payload: ResponsePayload<Product> = {
+      const updateProduct = await this.service.updateReview(id, product);
+      const payload: ResponsePayload<Review> = {
         message: "product updated successfully",
         status: 200,
         data: updateProduct,
@@ -35,11 +35,11 @@ export class ProductController {
       next(error);
     }
   };
-  getProduct = async (req: Request, res: Response, next: NextFunction) => {
+  getReview = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const getProduct = await this.service.findById(id);
-      const payload: ResponsePayload<Product> = {
+      const payload: ResponsePayload<Review> = {
         message: "product get successfully",
         status: 200,
         data: getProduct,
@@ -49,10 +49,10 @@ export class ProductController {
       next(error);
     }
   };
-  getProducts = async (req: Request, res: Response, next: NextFunction) => {
+  getReviews = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const getProducts = await this.service.find();
-      const payload: ResponsePayload<Product[]> = {
+      const payload: ResponsePayload<Review[]> = {
         message: "product get successfully",
         status: 200,
         data: getProducts,
@@ -63,10 +63,10 @@ export class ProductController {
     }
   };
 
-  deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
+  deleteReview = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
-      const result = await this.service.deleteProduct(id);
+      const result = await this.service.deleteReview(id);
       const payload: ResponsePayload<boolean> = {
         message: "delete product  successfully",
         status: 200,

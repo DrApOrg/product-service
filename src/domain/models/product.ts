@@ -6,23 +6,12 @@ export interface Product {
   price: number;
   image?: string;
   category?: string;
+  subcategory?: string;
   size?: number;
-  color?: string;
-  stock: number;
-  supplier: string;
-  comments: Comment[];
-  ratings: Rating[];
+  color?: string[];
+  stock?: number;
+  composition?: string;
+  supplier?: string;
   createdAt: string;
   updatedAt: string;
-}
-
-interface Comment {
-  user: string;
-  content: string;
-  date: Date;
-}
-
-interface Rating {
-  user: string;
-  value: number;
 }

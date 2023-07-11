@@ -6,7 +6,6 @@ export interface ProductService {
   createProduct: (product: Product) => Promise<Product>;
   updateProduct: (id: string, body: Product) => Promise<Product>;
   findById: (id: string) => Promise<Product>;
-  uploadFile: (param: any) => Promise<string>;
   deleteProduct: (id: string) => Promise<boolean>;
 }
 
@@ -15,10 +14,6 @@ export class ProductService implements ProductService {
     private accRepo: ProductRepository,
     private s3Repo: IFileRepository
   ) {}
-
-  uploadFile = async (param: any): Promise<string> => {
-    return this.s3Repo.uploadFile(param);
-  };
 
   createProduct = async (product: Product): Promise<Product> => {
     const createdProduct = await this.accRepo.create(product);

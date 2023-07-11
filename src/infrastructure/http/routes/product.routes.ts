@@ -15,7 +15,6 @@ export const ProductRoutes = (app: Application) => {
   app.get("/v1/api/product", productController.getProducts);
   app.put("/v1/api/product/:id", productController.updateProduct);
   app.delete("/v1/api/product/:id", productController.deleteProduct);
-  app.post("/v1/api/auth/upload", productController.uploadImage);
   app.get("/v1/api/auth/test", (req: Request, res: Response) => {
     res.send("hola mundo desde usuarios");
   });
